@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row m-3">
+                <div class="col-12">
+                    <h2 class="h2-responsive text-center">Web Messaging Frame</h2>
+                </div>
+                <div class="col-12 mt-4">
+                    <p>
+                        <span class="font-weight-bold">Message status:</span>
+                        <span id="msgbox" class="font-italic">nothing received yet</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            window.addEventListener('message', (event) => {
+                let origin = event.origin;
+                let data = event.data;
+
+                console.log(`Receving message from ${origin}: ${data}`);
+                document.getElementById('msgbox').textContent = `Message from '${origin}': ${data}`;
+            });
+            
+        </script>
+    </body>
+
+</html>
