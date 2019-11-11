@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Playground - Web Messaging</title>
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            #frame {
+                border: grey solid 1px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row m-3">
+                <div class="col-12">
+                    <h2 class="h2-responsive text-center">Web Messaging</h2>
+                    <h5 class="h5-responsive text-center">A Tournament playground application</h5>
+
+                    <p class="lead mt-5">The frame you can see below is a cross-origin frame running on the <i>TODO</i> origin. Use the input fields below to control the parameters to the <i>postMessage</i> function. Both the message and the destination origin can be changed.</p>
+                </div>
+                <div class="col-12 mt-4">
+                    <div class="form-group">
+						<label for="message">The message</label>
+						<input id="message" class="form-control" type="text" length="25" value="knock knock">
+					</div>
+                    <div class="form-group">
+						<label for="origin">The destination origin</label>
+						<input id="origin" class="form-control" type="text" length="25" value="*">
+					</div>
+                    <div class="form-group text-center">
+                        <button id="btn-send" class="btn btn-small btn-primary ml-3">Send message</button>
+                    </div>
+                </div>
+                <div class="col-12 mt-5 embed-responsive embed-responsive-16by9">
+                    <iframe id="frame" class="embed-responsive-item" src="https://raw.githubusercontent.com/philippederyck/pws-tournament-playground-webmessaging/master/frame.html"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                document.getElementById('btn-send').addEventListener('click', sendMessage);
+            });
+
+            function sendMessage() {
+                let frame = document.getElementById('frame').contentWindow;
+                let msg = document.getElementById('message').value;
+                
+                console.log(`Sending message to frame: ${msg}`);
+                frame.postMessage(msg, '*');
+            }
+        </script>
+    </body>
+
+</html>
